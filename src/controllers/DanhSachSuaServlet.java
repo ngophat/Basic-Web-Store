@@ -50,9 +50,11 @@ public class DanhSachSuaServlet extends HttpServlet {
         if(div!=0) {
         	tongSoTrang ++;
         }
-        if(request.getParameter("trang")!=null) {     	
-            min = 5*(Integer.parseInt(request.getParameter("trang"))-1);
-            max = 5*Integer.parseInt(request.getParameter("trang"));
+        if(request.getParameter("trang")!=null) {
+        	int limit = Integer.parseInt(request.getParameter("trang"));
+            min = 5*((limit)-1);
+            max =(limit==tongSoTrang) ?
+            		5*Integer.parseInt(request.getParameter("trang"))-div+1 : 5*Integer.parseInt(request.getParameter("trang"));
         }            
         List<Sua> suaPhanTrang = suaSBLocal.phanTrang(tatCa, min, max);
         
