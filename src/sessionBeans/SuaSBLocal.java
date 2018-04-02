@@ -13,4 +13,5 @@ public interface SuaSBLocal {
 	void themSua(Sua sua);
 	List<Sua> timTheoTen(String maHS, String maLS, String tenSua);
 	int tongSanPham(List<Sua> list);
+	List<Sua> phanTrang(List<Sua> list, int min, int max);
 }

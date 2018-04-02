@@ -34,11 +34,15 @@ public class SuaBanChayServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 
 		// Thi sinh viet them cac lenh vao day de thuc hien
-		List<Sua> list = ctHoadonLocal.suaBanChay();
+		List<Sua> list = ctHoadonLocal.suaBanChay(5);
 		request.setAttribute("listDS", list);
-
-		String mahang = request.getParameter("maSua");
-		Sua sua = suaSBLocal.timTheoMa(mahang);
+		Sua sua; 
+		if(request.getParameter("maSua")==null) {
+			sua = list.get(0);
+		}else {
+			String mahang = request.getParameter("maSua");
+			sua = suaSBLocal.timTheoMa(mahang);
+		}			
 		request.setAttribute("Sua", sua);
 
 		request.getRequestDispatcher("views/sua-ban-chay.jsp").include(request, response);

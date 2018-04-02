@@ -10,13 +10,10 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="ct_hoadon")
-@NamedQueries({
-	@NamedQuery(name="CtHoadon.findAll", query="SELECT c FROM CtHoadon c"),
-	@NamedQuery(name="SuaBanChay", query="SELECT hd.sua " + 
-			"FROM CtHoadon hd " + 
-			"WHERE hd.so_luong>=10 " + 
-			"GROUP BY hd.sua.ten_sua")
-})
+@NamedQuery(name = "SuaBanChay", query="SELECT hd.sua " + 
+		"FROM CtHoadon hd " + 
+		"GROUP BY hd.sua.ten_sua " +
+		"ORDER BY SUM(hd.so_luong) desc")
 public class CtHoadon implements Serializable {
 	private static final long serialVersionUID = 1L;
 

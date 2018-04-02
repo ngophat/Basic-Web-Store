@@ -1,5 +1,6 @@
 package sessionBeans;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -70,4 +71,12 @@ public class SuaSB implements SuaSBLocal {
 		return list.size();
 	}
 
+	@Override
+	public List<Sua> phanTrang(List<Sua> list, int min, int max) {
+		List<Sua> sua = new ArrayList<>();
+		for(int i=min;i<max;i++) {
+			sua.add(list.get(i));
+		}
+		return sua;
+	}	
 }

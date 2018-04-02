@@ -8,5 +8,5 @@ import entityBeans.Sua;
 
 @Local
 public interface CtHoadonSBLocal {
-	List<Sua> suaBanChay();
+	List<Sua> suaBanChay(int n);
 }

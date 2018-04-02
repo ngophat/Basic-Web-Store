@@ -29,7 +29,7 @@
                 <td>
                     <p><b><i>Thành phần dinh dưỡng:</i></b><br>${Sua.tp_dinh_duong }</p>
                     <p><b><i>Lợi ích:</i></b><br>${Sua.loi_ich }</p>
-                    <fmt:formatNumber value="${Sua.don_gia }" type="number" var="donGia"/>
+                    <fmt:formatNumber value="${Sua.don_gia}" type="number" var="donGia"/>
                     <p><b><i>Trọng lượng:</i></b> ${Sua.trong_luong } gr - <b><i>Đơn giá:</i></b> ${donGia} đ</p>
                 </td>
             </tr>

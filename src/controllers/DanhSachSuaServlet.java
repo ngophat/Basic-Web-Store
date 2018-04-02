@@ -41,13 +41,26 @@ public class DanhSachSuaServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
         //Thi sinh viet them cac lenh vao day de thuc hien
-        List<Sua> list = ctHoadonLocal.suaBanChay();
-        request.setAttribute("listCt", list.get(0));
         
+        List<Sua> tatCa = suaSBLocal.docTatCa();
+        int min=0, max=5, tongSoTrang, div;
+        
+        tongSoTrang = suaSBLocal.tongSanPham(tatCa)/5;
+        div = suaSBLocal.tongSanPham(tatCa)%5;
+        if(div!=0) {
+        	tongSoTrang ++;
+        }
+        if(request.getParameter("trang")!=null) {     	
+            min = 5*(Integer.parseInt(request.getParameter("trang"))-1);
+            max = 5*Integer.parseInt(request.getParameter("trang"));
+        }            
+        List<Sua> suaPhanTrang = suaSBLocal.phanTrang(tatCa, min, max);
+        
+        request.setAttribute("tongSoTrang", tongSoTrang);
         request.setAttribute("listHS", hangSuaSBLocal.docTatCa());
         request.setAttribute("listLS", loaiSuaSBLocal.docTatCa());
-        request.setAttribute("listS", suaSBLocal.docTatCa());
-        request.setAttribute("tongSoTrang", 4);
+        request.setAttribute("listS", suaPhanTrang);
+        
         request.getRequestDispatcher("views/danh-sach-sua.jsp").include(request, response);
 	}
 
