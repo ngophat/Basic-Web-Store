@@ -43,21 +43,14 @@ public class DanhSachSuaServlet extends HttpServlet {
         //Thi sinh viet them cac lenh vao day de thuc hien
         
         List<Sua> tatCa = suaSBLocal.docTatCa();
-        int min=0, max=5, tongSoTrang, div;
+        int tongSP, page=0, tongSoTrang;
         
-        tongSoTrang = suaSBLocal.tongSanPham(tatCa)/5;
-        div = suaSBLocal.tongSanPham(tatCa)%5;
-        if(div!=0) {
-        	tongSoTrang ++;
-        }
+        tongSP = suaSBLocal.tongSanPham(tatCa);
+        tongSoTrang = suaSBLocal.tongSoTrang(tongSP);
         if(request.getParameter("trang")!=null) {
-        	int limit = Integer.parseInt(request.getParameter("trang"));
-            min = 5*((limit)-1);
-            max =(limit==tongSoTrang) ?
-            		5*Integer.parseInt(request.getParameter("trang"))-div+1 : 5*Integer.parseInt(request.getParameter("trang"));
+        	page = Integer.parseInt(request.getParameter("trang"));        
         }            
-        List<Sua> suaPhanTrang = suaSBLocal.phanTrang(tatCa, min, max);
-        
+        List<Sua> suaPhanTrang = suaSBLocal.phanTrang(tatCa, page, tongSP,tongSoTrang);
         request.setAttribute("tongSoTrang", tongSoTrang);
         request.setAttribute("listHS", hangSuaSBLocal.docTatCa());
         request.setAttribute("listLS", loaiSuaSBLocal.docTatCa());

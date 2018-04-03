@@ -72,11 +72,28 @@ public class SuaSB implements SuaSBLocal {
 	}
 
 	@Override
-	public List<Sua> phanTrang(List<Sua> list, int min, int max) {
+	public List<Sua> phanTrang(List<Sua> list, int page, int tongSP, int tongST) {
+		int div = tongSP%5, min=0, max = 5;
+		if(page!=0) {
+			min = 5*((page)-1);
+	        max =(page==tongST) ?
+	        		5*page-div+1 : 5*page;   
+		}	    
 		List<Sua> sua = new ArrayList<>();
 		for(int i=min;i<max;i++) {
 			sua.add(list.get(i));
 		}
 		return sua;
+	}
+
+	@Override
+	public int tongSoTrang(int tongSanPham) {
+		int div, tongSoTrang;
+		tongSoTrang = tongSanPham/5;
+		div = tongSanPham%5;
+        if(div!=0) {
+        	tongSoTrang ++;
+        }
+		return tongSoTrang;
 	}	
 }
